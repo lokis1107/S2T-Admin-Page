@@ -118,6 +118,27 @@ app.post("/ulogin", async (req, res) => {
   }
 });
 
+// Create a new User for the admin side
+
+app.post("/clientsCreation", async (req, res) => {
+  try {
+    const { name, clientId, password } = req.body;
+
+    // Check the user id is already exist
+    const existUser = await User.findOne({ clientId });
+    if (existUser) {
+      alert("The Email Address is already exist");
+    }
+
+    // Create a new user
+    User.create(req.body)
+      .then((login) => res.json(login))
+      .catch((err) => console.log(err));
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 //endpoint to store a new address to the backend
 app.post("/addresses", async (req, res) => {
   try {
