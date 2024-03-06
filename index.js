@@ -80,6 +80,17 @@ app.get("/getClient", async (req, res) => {
   }
 });
 
+// Get the user of the page
+
+app.get("/getAdmin", async (req, res) => {
+  try {
+    const allUser = await Admin.find({});
+    res.send({ status: "ok", data: allUser });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 // User modal inserting page
 
 require("./model/user");
